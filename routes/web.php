@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'home');
+Route::post('/subscribeUser',[App\Http\Controllers\subscribeController::class,'subscribe']);
+// Route::resource('users', [App\Http\Controllers\userController::class]);
+Route::resource('users', userController::class);

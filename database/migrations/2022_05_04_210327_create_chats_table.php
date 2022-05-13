@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('gender');
-            $table->rememberToken();
+            $table->unsignedBigInteger('fromid');
+            $table->unsignedBigInteger('toid');
+            $table->string('message');
+            $table->boolean('seen');
             $table->timestamps();
+            $table->foreign('fromid')->references('id')->on('users');
+            $table->foreign('toid')->references('id')->on('users');
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('chats');
     }
 };
